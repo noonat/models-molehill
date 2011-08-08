@@ -48,7 +48,6 @@ package com.phuce.obj {
       var face:Vector.<String>;
       var group:OBJGroup;
       var materialName:String;
-      var faces:Vector.<OBJFace> = new Vector.<OBJFace>();
       var positions:Vector.<Number> = new Vector.<Number>();
       var normals:Vector.<Number> = new Vector.<Number>();
       var uvs:Vector.<Number> = new Vector.<Number>();
