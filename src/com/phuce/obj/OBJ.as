@@ -9,6 +9,7 @@ package com.phuce.obj {
     public var name:String;
     public var groups:Vector.<OBJGroup>;
     public var vertexBuffer:VertexBuffer3D;
+    
     protected var _materials:Dictionary;
     protected var _tupleIndex:uint;
     protected var _tupleIndices:Dictionary;
@@ -56,16 +57,17 @@ package com.phuce.obj {
       var text:String = bytes.readUTFBytes(bytes.bytesAvailable);
       var lines:Array = text.split(/[\r\n]+/);
       for each (var line:String in lines) {
-        // trim whitespace
+        // Trim whitespace from the line
         line = line.replace(/^\s*|\s*$/g, '');
         if (line == '' || line.charAt(0) === '#') {
-          // blank line or comment, ignore it
+          // Blank line or comment, ignore it
           continue;
         }
 
-        // split line into fields on whitespace
+        // Split line into fields on whitespace
         var fields:Array = line.split(/\s+/);
         switch (fields[0].toLowerCase()) {
+          // Vertex position
           case 'v':
             positions.push(
               parseFloat(fields[1]),
@@ -73,6 +75,7 @@ package com.phuce.obj {
               parseFloat(fields[3]));
             break;
 
+          // Vertex normal
           case 'vn':
             normals.push(
               parseFloat(fields[1]),
@@ -80,12 +83,14 @@ package com.phuce.obj {
               parseFloat(fields[3]));
             break;
 
+          // Vertex UV
           case 'vt':
             uvs.push(
               parseFloat(fields[1]),
               1.0 - parseFloat(fields[2]));
             break;
 
+          // Face indices, specified in sets of "position/uv/normal"
           case 'f':
             face = new Vector.<String>();
             for each (var tuple:String in fields.slice(1)) {
@@ -98,20 +103,24 @@ package com.phuce.obj {
             group._faces.push(face);
             break;
 
+          // New group, with a name
           case 'g':
             group = new OBJGroup(fields[1], materialName);
             groups.push(group);
             break;
 
+          // Object name. The OBJ will only have one object statement.
           case 'o':
             name = fields[1];
             break;
 
+          // Material library. I'm not handling this for now, Instead call
+          // setMaterial() for each of the named materials.
           case 'mtllib':
-            // I'm not handling mtllib for now. Instead, call setMaterial()
-            // for each of the named materials.
             break;
 
+          // Specifies the material for the current group (and any future
+          // groups that don't have their own usemtl statement)
           case 'usemtl':
             materialName = fields[1];
             if (group !== null) {

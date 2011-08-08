@@ -4,16 +4,15 @@ package {
   import com.phuce.Utils;
   import com.phuce.obj.OBJ;
   import com.phuce.obj.OBJGroup;
+  import flash.display.BitmapData;
   import flash.display3D.Context3D;
   import flash.display3D.Context3DProgramType;
+  import flash.display3D.Context3DTextureFormat;
   import flash.display3D.Context3DVertexBufferFormat;
   import flash.display3D.Program3D;
+  import flash.display3D.textures.Texture;
   import flash.geom.Matrix3D;
   import flash.geom.Vector3D;
-
-  import flash.display.BitmapData;
-  import flash.display3D.Context3DTextureFormat;
-  import flash.display3D.textures.Texture;
 
   [SWF(width=640, height=480, backgroundColor="#000000")]
   public class DemoOBJ extends Engine {
@@ -30,7 +29,7 @@ package {
     protected var _bodyTexture:Texture;
     protected var _program:Program3D;
     protected var _fragmentConstants:Vector.<Number> = Vector.<Number>([
-      0, -28, -64, 1,  // light position
+      0, -29, -64, 1,  // light position
       0.05,            // min light value
     ]);
 
@@ -98,7 +97,7 @@ package {
       // Move the camera back a bit
       _modelView.identity();
       _modelView.append(_model);
-      _modelView.appendTranslation(0, -28, -64);
+      _modelView.appendTranslation(0, -29, -64);
 
       // Merge it all with the projection matrix
       _modelViewProjection.identity();

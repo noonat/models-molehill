@@ -1,6 +1,10 @@
 package com.phuce.obj {
   import flash.display3D.IndexBuffer3D;
 
+  /**
+  * An OBJ group. Each group has its own set of indexes and material an OBJ
+  * file may have more than one of these.
+  */
   public class OBJGroup {
     public var name:String;
     public var materialName:String;

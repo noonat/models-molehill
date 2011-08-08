@@ -3,6 +3,13 @@ package com.phuce {
   import flash.utils.ByteArray;
 
   public class Utils {
+    /**
+    * Create a perspective projection matrix.
+    * @param fov Field of view
+    * @param aspect Aspect ratio
+    * @param near Distance to the near plane
+    * @param far Distance to the far plane
+    */
     static public function perspectiveProjection(
       fov:Number=90, aspect:Number=1, near:Number=1, far:Number=2048):Matrix3D {
       var y2:Number = near * Math.tan(fov * Math.PI / 360);
